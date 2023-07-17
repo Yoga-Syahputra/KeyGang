@@ -538,15 +538,16 @@ class KeyGang(MDApp):
         hashed_key = hashlib.sha256(key.encode()).hexdigest()
         hashed_output = hashlib.sha256(output_text.encode()).hexdigest()
 
-        # Get the Current Timestamp
-        timestamp = datetime.now()
+        # Censor the input and key
+        censored_input = self.censor_text(input_text)
+        censored_key = self.censor_text(key)
 
         # Create a Document for the Activity
         activity = {
-            'timestamp': timestamp,
-            'input_text': input_text,
+            'timestamp': datetime.now(),
+            'input_text': censored_input,
             'hashed_input': hashed_input,
-            'key': key,
+            'key': censored_key,
             'hashed_key': hashed_key,
             'output_text': output_text,
             'hashed_output': hashed_output,
